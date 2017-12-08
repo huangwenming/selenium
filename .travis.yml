@@ -15,7 +15,7 @@ _bindings:
     jdk: oraclejdk8
   python: &python
     language: python
-    python: "2.7"
+    python: 2.7
   ruby: &ruby
     language: ruby
     rvm: 2.0.0-p648
@@ -36,6 +36,9 @@ _browsers:
       apt:
         packages:
           - google-chrome-stable
+  safari: &safari
+    os: osx
+    osx_image: xcode9.1
 
 matrix:
   fast_finish: true
@@ -157,6 +160,9 @@ matrix:
     - env: TASK=//rb:ff-esr-test
       <<: *ruby
       <<: *firefox-esr
+    - env: SAFARI=1 TASK=//rb:safari-test
+      <<: *ruby
+      <<: *safari
     - env: CHROME=1 TASK=//rb:remote-chrome-test
       <<: *ruby
       <<: *chrome
@@ -166,6 +172,9 @@ matrix:
     - env: TASK=//rb:remote-ff-esr-test
       <<: *ruby
       <<: *firefox-esr
+    - env: SAFARI=1 TASK=//rb:remote-safari-test
+      <<: *ruby
+      <<: *safari
     - env: TASK=//rb:docs
       <<: *ruby
     - env: TASK=//rb:lint
